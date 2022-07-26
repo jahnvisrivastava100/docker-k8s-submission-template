@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-counter
+  namespace: jahnvisrivastava100
+  labels:
+    component: counter
+spec:
+  selector:
+    app: counter
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

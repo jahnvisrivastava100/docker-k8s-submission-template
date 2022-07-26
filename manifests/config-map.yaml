@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+  namespace: jahnvisrivastava100
+  labels:
+    component: config
+data:
+  part-of: CWiCS
+  counter-url: service-counter
+  converter-url: service-converte
