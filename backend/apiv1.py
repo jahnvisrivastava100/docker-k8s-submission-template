@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException,Request
+from fastapi import FastAPI, UploadFile, File, HTTPException,Request,response,requests
 import yaml
 import os
 
@@ -25,11 +25,11 @@ def conv():
 async def get_body(request: Request):
     try:
         req_info = await request.json()
-        return {
-            "status": "SUUCCESS",
-            "data"  : req_info
-        }
-        return await request.json()
+        requests.post("http://counter:8080/count").raise_for_status()
+        resp = requests.post("http://converter:8080/convert", json=req_info)
+        response.status_code = resp.status_code
+        return resp.text
+        
     except Exception as e:
         raise HTTPException(
             status_code=400, detail={"message": "Error", "detail": str(e)}
